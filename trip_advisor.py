@@ -78,7 +78,7 @@ def main():
     else:
         st.write("Sorry, we couldn't find any matching destinations for your preferences. Here's a random suggestion:")
         random_destination = recommendation_system.predict_random_destination()
-        st.write(random_destination)
+        st.success(random_destination)
 
 if __name__ == "__main__":
     main()
