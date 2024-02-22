@@ -48,10 +48,14 @@ def main():
     recommendation_system = VacationRecommendationSystem(destinations_data)
 
     # User input
-    user_season = st.text_input("Enter your favorite season: ").lower()
-    user_weather = st.text_input("Enter preferred weather: ").lower()
-    user_demography = st.text_input("Enter your demography: ").lower()
-    user_foods = [st.text_input("Enter preferred food: ".format(i)).lower() for i in range(1, 4)]
+    user_season = st.selectbox('Select your favorite season', [''] + sorted(destinations_data['Season'].unique()))
+    user_weather = st.selectbox('Select your favorite weather', [''] + sorted(destinations_data['Weather'].unique()))
+    user_demography = st.selectbox('Select your favorite demography', [''] + sorted(destinations_data['Demography'].unique()))
+    user_foods = st.selectbox('Select your favorite demography', [''] + sorted(destinations_data['Food1','Food2','Food3'].unique()))
+    #user_season = st.text_input("Enter your favorite season: ").lower()
+    #user_weather = st.text_input("Enter preferred weather: ").lower()
+    #user_demography = st.text_input("Enter your demography: ").lower()
+    #user_foods = [st.text_input("Enter preferred food: ".format(i)).lower() for i in range(1, 4)]
 
     # Get recommendations
     recommendations = recommendation_system.recommend_destination(user_season, user_weather, user_demography, user_foods)
