@@ -1,4 +1,5 @@
 import csv
+import random
 import streamlit as st
 
 class VacationDestination:
@@ -8,6 +9,9 @@ class VacationDestination:
         self.weather = weather
         self.demography = demography
         self.foods = foods
+
+    def __str__(self):
+        return f"Name: {self.name}\nSeason: {', '.join(self.season)}\nWeather: {', '.join(self.weather)}\nDemography: {', '.join(self.demography)}\nFoods: {', '.join(self.foods)}\n"
 
 class VacationRecommendationSystem:
     def __init__(self, destinations):
@@ -22,6 +26,10 @@ class VacationRecommendationSystem:
                 any(food in destination.foods for food in foods)):
                 matching_destinations.append(destination)
         return matching_destinations
+
+    def predict_random_destination(self):
+        # You can define your criteria for random selection here
+        return random.choice(self.destinations)
 
 # Load destinations from CSV
 def load_destinations_from_csv(filename):
@@ -66,9 +74,11 @@ def main():
     if recommendations:
         st.header("Here are some vacation destinations matching your preferences:")
         for destination in recommendations:
-            st.write(destination.name)
+            st.write(destination)
     else:
-        st.write("Sorry, we couldn't find any matching destinations for your preferences.")
+        st.write("Sorry, we couldn't find any matching destinations for your preferences. Here's a random suggestion:")
+        random_destination = recommendation_system.predict_random_destination()
+        st.write(random_destination)
 
 if __name__ == "__main__":
     main()
