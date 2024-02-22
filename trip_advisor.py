@@ -25,7 +25,7 @@ class VacationRecommendationSystem:
                 any(demography in destination.demography for demography in demographies) or
                 any(food in destination.foods for food in foods)):
                 matching_destinations.append(destination)
-        return matching_destinations
+        return matching_destinations[:5]
 
     def predict_random_destination(self):
         # You can define your criteria for random selection here
