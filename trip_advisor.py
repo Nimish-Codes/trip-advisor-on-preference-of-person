@@ -17,12 +17,12 @@ class VacationRecommendationSystem:
     def __init__(self, destinations):
         self.destinations = destinations
 
-    def recommend_destination(self, season, weather, demography, foods):
+    def recommend_destination(self, seasons, weathers, demographies, foods):
         matching_destinations = []
         for destination in self.destinations:
-            if (season in destination.season and
-                weather in destination.weather and
-                demography in destination.demography and
+            if (any(season in destination.season for season in seasons) or
+                any(weather in destination.weather for weather in weathers) or
+                any(demography in destination.demography for demography in demographies) or
                 any(food in destination.foods for food in foods)):
                 matching_destinations.append(destination)
         return matching_destinations
@@ -62,13 +62,13 @@ def main():
     foods = sorted(set(sum([destination.foods for destination in destinations_data], [])))
 
     # User input
-    user_season = st.multiselect("Select your favorite season:", seasons).lower()
-    user_weather = st.multiselect("Select preferred weather:", weathers).lower()
-    user_demography = st.multiselect("Select your demography:", demographies).lower()
-    user_foods = [st.multiselect("Select preferred food {}: ".format(i), foods).lower() for i in range(1, 4)]
+    user_seasons = st.multiselect("Select your favorite season:", seasons)
+    user_weathers = st.multiselect("Select preferred weather:", weathers)
+    user_demographies = st.multiselect("Select your demography:", demographies)
+    user_foods = st.multiselect("Select preferred foods: ", foods)
 
     # Get recommendations
-    recommendations = recommendation_system.recommend_destination(user_season, user_weather, user_demography, user_foods)
+    recommendations = recommendation_system.recommend_destination(user_seasons, user_weathers, user_demographies, user_foods)
 
     # Display recommendations
     if recommendations:
