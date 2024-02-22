@@ -74,7 +74,7 @@ def main():
     if recommendations:
         st.header("Here are some vacation destinations matching your preferences:")
         for destination in recommendations:
-            st.write(destination)
+            st.success(destination)
     else:
         st.write("Sorry, we couldn't find any matching destinations for your preferences. Here's a random suggestion:")
         random_destination = recommendation_system.predict_random_destination()
