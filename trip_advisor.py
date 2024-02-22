@@ -11,7 +11,7 @@ class VacationDestination:
         self.foods = foods
 
     def __str__(self):
-        return f"Name: {self.name}\nSeason: {', '.join(self.season)}\nWeather: {', '.join(self.weather)}\nDemography: {', '.join(self.demography)}\nFoods: {', '.join(self.foods)}\n"
+        return f"Name: {self.name}\n\nSeason: {', '.join(self.season)}\n\nWeather: {', '.join(self.weather)}\n\nDemography: {', '.join(self.demography)}\n\nFoods: {', '.join(self.foods)}\n\n"
 
 class VacationRecommendationSystem:
     def __init__(self, destinations):
