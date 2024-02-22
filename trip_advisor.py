@@ -54,10 +54,10 @@ def main():
     foods = sorted(set(sum([destination.foods for destination in destinations_data], [])))
 
     # User input
-    user_season = st.selectbox("Select your favorite season:", seasons).lower()
-    user_weather = st.selectbox("Select preferred weather:", weathers).lower()
-    user_demography = st.selectbox("Select your demography:", demographies).lower()
-    user_foods = [st.selectbox("Select preferred food {}: ".format(i), foods).lower() for i in range(1, 4)]
+    user_season = st.multiselect("Select your favorite season:", seasons).lower()
+    user_weather = st.multiselect("Select preferred weather:", weathers).lower()
+    user_demography = st.multiselect("Select your demography:", demographies).lower()
+    user_foods = [st.multiselect("Select preferred food {}: ".format(i), foods).lower() for i in range(1, 4)]
 
     # Get recommendations
     recommendations = recommendation_system.recommend_destination(user_season, user_weather, user_demography, user_foods)
